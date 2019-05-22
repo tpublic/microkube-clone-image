@@ -1,17 +1,40 @@
+FROM ubuntu as intermediate
+
+# install git
+RUN apt-get update
+RUN apt-get install -y git
+
+# add credentials on build
+ARG SSH_PRIVATE_KEY
+RUN mkdir /root/.ssh/
+RUN echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_rsa
+
+# make sure your domain is accepted
+# RUN touch /root/.ssh/known_hosts
+# RUN ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
+
+
+RUN echo "Cloning repo" && \
+        cd /home/app/ && \
+        git --exec-path && \
+        git clone https://gogs.bluelight.limited/tansen/microkube.git 
+
+
+
 FROM docker.bluelight.limited:5000/bluelightltd/microkube-bundler-image
+
+RUN mkdir -p /home/app/microkube
+
+# copy the repository form the previous image
+COPY --from=intermediate /microkube /home/app/microkube
 
 RUN chown -R app.app /home
 
 USER app
 
-RUN echo "Cloning repo" && \
-        cd /home/app/ && \
-        git --exec-path && \
-        git clone https://gogs.bluelight.limited/tansen/microkube.git && \
-        cd microkube
 
-        # git clone https://github.com/rubykube/microkube.git && \
+RUN echo "Checking repo" && \
+        cd /home/app/microkube && \
+        ls -l
 
-
-#CMD ["/bin/bash", "-c", "top"]
 
