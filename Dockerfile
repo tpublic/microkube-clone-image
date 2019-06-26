@@ -16,7 +16,7 @@ RUN echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_rsa
 
 RUN echo "Cloning repo" && \
         git --exec-path && \
-        git clone https://gogs.bluelight.limited/tansen/microkube.git 
+        git clone https://github.com/tpublic/microkube.git
 
 
 
