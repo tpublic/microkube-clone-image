@@ -21,7 +21,7 @@ RUN echo "Cloning repo" && \
 
 
 
-FROM docker.bluelight.limited:5000/bluelightltd/microkube-bundler-image
+FROM docker.bluelight.limited:5000/bluelightltd/microkube-bundler-image:latest
 
 RUN mkdir -p /home/app/microkube
 
