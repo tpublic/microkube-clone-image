@@ -17,6 +17,7 @@ RUN echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_rsa
 RUN echo "Cloning repo: key::035 " && \
         git --exec-path && \
         git clone https://github.com/tpublic/mkiii.git && \
+        mv mkiii microkube && \
         find microkube/*
 
 
