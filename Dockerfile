@@ -14,9 +14,9 @@ RUN echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_rsa
 # RUN ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
 
 
-RUN echo "Cloning repo: key::034 " && \
+RUN echo "Cloning repo: key::035 " && \
         git --exec-path && \
-        git clone https://github.com/tpublic/microkube.git && \
+        git clone https://github.com/tpublic/mkiii.git && \
         find microkube/*
 
 
